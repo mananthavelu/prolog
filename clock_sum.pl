@@ -1,3 +1,7 @@
+solve(N,Sum,FinalResult):-
+    create_list(N,L),findall(Result,permute(L,Result),Results),
+    findall(H,(member(H,Results),check_sum(H,Sum)),FinalResult).
+
 check_sum(List,Sum):-check_left_to_right(List,Sum),
     last_but_two_elements(List,Result1),first_element(List,Result2),first_two_elements(List,Result3),
     last_element(List,Result4),check_sum(Result1,Result2,Result3,Result4,Sum).
@@ -26,3 +30,23 @@ check_sum(List1,Result2,List3,Result4,Sum):-sum_of(List1,Sum1),sum_of(List3,Sum3
 
 sum_of([],0).
 sum_of([H|T],Result):-sum_of(T,Tc), Result is H+Tc.
+
+create_list(N,L):-findall(N1,between(1,N,N1),L).
+
+permute([],[]).
+permute([X|L],P):-permute(L,L1),insert(X,L1,P).
+
+insert(H,L1,L2):-del(H,L2,L1).
+
+del(H,[H|T],T).
+del(H,[Y|T],[Y|Tail1]):-del(H,T,Tail1).
+
+/*
+%Query
+%solve(5,8,FinalResult)
+%For big N, the computation becomes expensive.
+[[2, 3, 4, 1, 5], [1, 3, 4, 2, 5], [3, 4, 2, 5, 1], [3, 4, 1, 5, 2], [2, 4, 3, 1, 5], [1, 4, 3, 2, 5], [4, 3, 2, 5, 1], [4, 3, 1, 5, 2], [4, 2, 5, 1, 3], 
+[4, 1, 5, 2, 3], [3, 2, 5, 1, 4], [3, 1, 5, 2, 4], [2, 5, 1, 3, 4], [1, 5, 2, 3, 4], [5, 2, 3, 4, 1], [5, 1, 3, 4, 2], [2, 5, 1, 4, 3], [1, 5, 2, 4, 3],
+[5, 2, 4, 3, 1], [5, 1, 4, 3, 2]]
+
+*/
