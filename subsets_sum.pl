@@ -21,6 +21,7 @@ sum_of_list([item(_,W1,V1)|T],SumW,SumV):-sum_of_list(T,SumWTail,SumVTail),SumW 
 %Sub question-3. The highest V value is asked. Highest V Values in the question is bit ambiguous.
 highest(List_of_items,HighV):-sort2(List_of_items,Sorted),high_V_value(Sorted,HighV).
 
+%Sorting a list - from exercise sessions - directly taken
 sort2(List,List):-
 	is_sorted(List).
 sort2(List,Result):-
