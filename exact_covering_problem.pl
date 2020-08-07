@@ -52,3 +52,7 @@ flatten([H|T], L3) :-
 %residual([a,b,c,d,e],a,[[a,b],[d,f,e,g]],[a,b],RIs,ROS)
 %[b, c, d, e]
 %[[d, f, e, g]]
+
+%findexactcovering([a,b,c,d],[[c,a],[b,d],[a,b],[b,c],[a,b,c]],Result)
+
+[[[c, a], [b, d]]]
